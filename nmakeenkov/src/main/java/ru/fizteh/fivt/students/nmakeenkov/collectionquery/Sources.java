@@ -2,6 +2,7 @@ package ru.fizteh.fivt.students.nmakeenkov.collectionquery;
 
 import java.io.InputStream;
 import java.nio.file.Path;
+import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 import java.util.Set;
@@ -21,7 +22,7 @@ public class Sources {
      */
     @SafeVarargs
     public static <T> List<T> list(T... items) {
-        return Arrays.asList(items);
+        return new ArrayList<>(Arrays.asList(items));
     }
 
     /**

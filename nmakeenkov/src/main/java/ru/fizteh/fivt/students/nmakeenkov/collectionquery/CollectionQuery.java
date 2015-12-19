@@ -26,7 +26,7 @@ public class CollectionQuery {
      *
      * @param args
      */
-    public static void main(String[] args) {
+    public static void main(String[] args) throws Exception {
         Iterable<Statistics> statistics =
                 from(list(
                         student("ivanov", LocalDate.parse("1986-08-06"), "494"),
@@ -111,22 +111,22 @@ public class CollectionQuery {
     public static class Statistics {
 
         private final String group;
-        private final Long count;
-        private final Long age;
+        private final Integer count;
+        private final Double age;
 
         public String getGroup() {
             return group;
         }
 
-        public Long getCount() {
+        public Integer getCount() {
             return count;
         }
 
-        public Long getAge() {
+        public Double getAge() {
             return age;
         }
 
-        public Statistics(String group, Long count, Long age) {
+        public Statistics(String group, Integer count, Double age) {
             this.group = group;
             this.count = count;
             this.age = age;
