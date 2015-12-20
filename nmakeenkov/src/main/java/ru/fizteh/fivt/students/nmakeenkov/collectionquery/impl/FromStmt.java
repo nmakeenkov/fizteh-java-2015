@@ -130,7 +130,7 @@ public class FromStmt<T> {
                     }
                 }
             }
-            FromStmt<Tuple<T, J>> newFrom = new FromStmt<Tuple<T, J>>(sourceForFrom);
+            FromStmt<Tuple<T, J>> newFrom = new FromStmt<>(sourceForFrom);
             newFrom.setPreviousResult(fromStmt.previousResult);
             return newFrom;
         }
@@ -144,16 +144,16 @@ public class FromStmt<T> {
                 if (mapForFirstSource.containsKey(leftKey.apply(element))) {
                     mapForFirstSource.get(leftKey.apply(element)).add(element);
                 } else {
-                    mapForFirstSource.put(leftKey.apply(element), Lists.newArrayList(element));
+                    mapForFirstSource.put(leftKey.apply(element),
+                            Lists.newArrayList(element));
                 }
             }
-            extraSource.stream().filter(element -> mapForFirstSource.
-                    containsKey(rightKey.apply(element))).forEach(element -> {
-                sourceForFrom.addAll(mapForFirstSource.
-                        get(rightKey.apply(element)).stream().
-                        map(firstElement -> new Tuple<>(firstElement, element)).
-                        collect(Collectors.toList()));
-            });
+            extraSource.stream().
+                    filter(element -> mapForFirstSource.containsKey(rightKey.apply(element))).
+                    forEach(element -> sourceForFrom.addAll(
+                            mapForFirstSource.get(rightKey.apply(element)).stream().
+                                    map(firstElement -> new Tuple<>(firstElement, element)).
+                                    collect(Collectors.toList())));
             FromStmt<Tuple<T, J>> newFrom = new FromStmt<>(sourceForFrom);
             newFrom.setPreviousResult(fromStmt.previousResult);
             return newFrom;

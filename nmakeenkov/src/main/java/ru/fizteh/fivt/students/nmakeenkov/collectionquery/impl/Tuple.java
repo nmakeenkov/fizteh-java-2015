@@ -28,4 +28,20 @@ public class Tuple<F, S> {
                 + ", second=" + second
                 + '}';
     }
+
+    @Override
+    public boolean equals(Object obj) {
+        if (!(obj instanceof Tuple)) {
+            return false;
+        }
+        Tuple oth = (Tuple) obj;
+        return this.first.equals(oth.first)
+                && this.second.equals(oth.second);
+    }
+
+
+    @Override
+    public int hashCode() {
+        return first.hashCode() * 227 + second.hashCode();
+    }
 }

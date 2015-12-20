@@ -1,5 +1,6 @@
 package ru.fizteh.fivt.students.nmakeenkov.collectionquery;
 
+import org.apache.commons.lang3.builder.HashCodeBuilder;
 import ru.fizteh.fivt.students.nmakeenkov.collectionquery.impl.Tuple;
 
 import java.time.LocalDate;
@@ -139,6 +140,26 @@ public class CollectionQuery {
                     + ", count=" + count
                     + ", age=" + age
                     + '}';
+        }
+
+        @Override
+        public boolean equals(Object obj) {
+            if (!(obj instanceof Statistics)) {
+                return false;
+            }
+            Statistics oth = (Statistics) obj;
+            return this.group.equals(oth.getGroup())
+                    && this.age.equals(oth.getAge())
+                    && this.count.equals(oth.getCount());
+        }
+
+        @Override
+        public int hashCode() {
+            return new HashCodeBuilder(227, 229)
+                    .append(group)
+                    .append(count)
+                    .append(age)
+                    .toHashCode();
         }
     }
 

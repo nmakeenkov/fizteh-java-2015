@@ -231,8 +231,12 @@ public class SelectStmt<T, R> implements Query<R> {
                     for (int i = 0; i < functions.length; ++i) {
                         classes[i] = temporaryResults.get(0).get(i).getClass();
                     }
-                    Constructor<R> constructor = rClass.getConstructor(classes);
-                    result.add(constructor.newInstance(objects.toArray()));
+                    try {
+                        Constructor<R> constructor = rClass.getConstructor(classes);
+                        result.add(constructor.newInstance(objects.toArray()));
+                    } catch (NoSuchMethodException ex) {
+                        throw new UnsupportedOperationException();
+                    }
                 }
             }
             if (isDistinct) {
